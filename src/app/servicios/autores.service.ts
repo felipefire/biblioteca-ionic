@@ -1,20 +1,19 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Libro } from '../interfaces/libro.interface';
+import { Autor } from '../interfaces/autor.interface';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LibrosService {
-
-  url: string = "http://localhost:3000/libro";
+export class AutoresService {
+  private url: string = 'http://localhost:3000/autor';
 
   constructor(
     private http: HttpClient
   ) { }
 
-  public get(): Observable<Libro[]>{
-    return this.http.get<Libro[]>(this.url);
+  public get(): Observable<Autor[]>{
+    return this.http.get<Autor[]>(this.url);
   }
 }

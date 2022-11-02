@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IonRefresher, ToastController } from '@ionic/angular';
-import { libro } from '../interfaces/libro.interface';
+import { Libro } from '../interfaces/libro.interface';
 import { LibrosService } from '../servicios/libros.service';
 
 @Component({
@@ -9,21 +9,23 @@ import { LibrosService } from '../servicios/libros.service';
   styleUrls: ['./libros.page.scss'],
 })
 export class LibrosPage implements OnInit {
+
   @ViewChild(IonRefresher) refresher: IonRefresher;
 
-   public listaLibros: libro[]=[]; 
+   public listaLibros: Libro[]=[]; 
    public cargandoLibros: boolean = false;
+   public modalVisible: boolean = false;
 
   constructor(
     private servicioLibros: LibrosService,
-    private servicioToast: ToastController,
+    private servicioToast: ToastController
   ) { }
 
   ngOnInit() {
     this.cargarLibros();
   }
   public cargarLibros(){
-    this.refresher?.complete()
+    this.refresher?.complete();
     this.cargandoLibros = true;
     this.servicioLibros.get().subscribe({
       next: (libros) => {
@@ -31,10 +33,10 @@ export class LibrosPage implements OnInit {
         this.cargandoLibros = false;
       } ,
       error: (e) => {
-        console.error('Error al consultar libros',e);
+        console.error("Error al consultar libros", e);
         this.cargandoLibros=false;
         this.servicioToast.create({
-          header: 'Error al Cargar libros',
+          header: 'Error al cargar libros',
           message: e.message,
           duration:3000,
           position:'bottom',
@@ -42,6 +44,10 @@ export class LibrosPage implements OnInit {
         }).then(toast => toast.present());
       }
     });
+  }
+
+  public nuevo(){
+    this.modalVisible = true;
   }
 
 }
