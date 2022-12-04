@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { SesionGuard } from './guards/sesion.guard';
 
 const routes: Routes = [
   {
@@ -13,11 +14,20 @@ const routes: Routes = [
   },
   {
     path: 'libros',
+    canActivate: [SesionGuard],//con esto tan solo se puede acceder despues del inicio de sesion
     loadChildren: () => import('./libros/libros.module').then( m => m.LibrosPageModule)
   },
   {
     path: 'autores',
     loadChildren: () => import('./autores/autores.module').then( m => m.AutoresPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   },
 ];
 

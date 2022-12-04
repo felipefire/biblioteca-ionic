@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-button slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-button>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="form">
+  <ion-list class="ion-padding">
+    <ion-item fill="outline">
+      <ion-label position="floating">No.Documento</ion-label>
+      <ion-input type="number" inputmode="number" formControlName="ciCtrl"></ion-input>
+      <ion-note *ngIf="form.controls.ciCtrl.touched" slot="error">Ingrese el numero de documento</ion-note>
+    </ion-item>
+    <ion-item fill="outline" class="ion-margin-top">
+      <ion-label position="floating">Contraseña</ion-label>
+      <ion-input type="password" formControlName="passwordCtrl"></ion-input>
+      <ion-note *ngIf="form.controls.passwordCtrl.touched" slot="error">Ingrese la Contraseña</ion-note>
+    </ion-item>
+  </ion-list>
+</form>
+    <ion-button expand="full" class="ion-margin-start ion-margin-end" (click)="iniciarSesion()">
+     <ion-icon name="lock-open" slot="start"></ion-icon>
+   Login
+   </ion-button>
+</ion-content>
